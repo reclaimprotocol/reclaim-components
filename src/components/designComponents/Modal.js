@@ -5,11 +5,6 @@ import ReactModal from 'react-modal';
 
 const BACKGROUND_MODAL_BACKDROP = 'rgba(26, 26, 26, 0.6)';
 
-const StyledCloseButtonWrapper = styled.span`
-  position: relative;
-  left: 16px;
-  top: 4px;
-`;
 
 const StyledModalHeading = styled.h3`
 	font-size: 16px;
@@ -27,6 +22,11 @@ const StyledHeadingWrapper = styled.div`
 	padding: 12px 0px 8px 0px;
 `;
 
+const StyledCloseButtonWrapper = styled.span`
+  position: relative;
+  left: 16px;
+  top: 4px;
+`;
 const StyledModalCloseBtn = styled.button`
 	background-color: transparent;
 	color: #6B6B6B;
@@ -138,7 +138,6 @@ const Modal = React.forwardRef(function Modal(props, ref) {
           id={id}
           className={className}
           ref={ref}
-          data-aether-id='aether-modal'
         >
 					<ModalHeader heading='Scan the QR code to submit proof' onClose={onClose} />
           {children}

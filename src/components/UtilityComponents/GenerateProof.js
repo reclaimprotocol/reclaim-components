@@ -48,18 +48,26 @@ const {
             setSession(session);
             setIsModalOpen(true);
         }
-        console.log(session);
     }
 
 	// render
-  if (sessionState === 'IDLE') return <button className='reclaim-ds-button' onClick={generateSession}>Generate Proof</button>;
-  if (sessionState === 'PROCESSING') return <button className='reclaim-ds-button'>Generating...</button>;
-  if (sessionState === 'COMPLETED') return <button className='reclaim-ds-button'>Proof Submitted Successfully</button>;
-  if (sessionState === 'FAILED') return <button className='reclaim-ds-button'>Proof Submission Failed</button>;
 
+
+	const renderButton = () => {
+		if (sessionState === 'IDLE' || sessionState === 'FAILED' ) return <button className='reclaim-ds-button-generate-qr' onClick={generateSession}>Generate QR</button>;
+		return <button className='reclaim-ds-button-generate-qr' disabled={sessionState==='PROCESSING'} onClick={()=> setIsModalOpen(true)}>View QR</button>;
+	};
+	const renderAcknowledgement = () => {
+		if (sessionState === 'PROCESSING') return <span className='reclaim-generate-proof-ack'>Generating...</span>;
+		if (sessionState === 'COMPLETED') return <span className='reclaim-generate-proof-ack'>Proof Submitted Successfully</span>;
+		if (sessionState === 'FAILED') return <span className='reclaim-generate-proof-ack'>Proof Submission Failed</span>;
+	};
+
+	const QRLink = session && session.link || '';
 	return (
 		<>
-			<button className='reclaim-ds-button' onClick={generateSession}>Generate Proof</button>
+			<div>{renderButton()}</div>
+			{renderAcknowledgement()}
 			<Modal
 				isOpen={isModalOpen}
 				onClose={() => {setIsModalOpen(false)}}
@@ -67,8 +75,7 @@ const {
 				className='Reclaim-ds-modal'
 				role='dialog'
 			>
-				
-				<QRCode value={session.link} size={200} />
+				<QRCode value={QRLink} size={200} />
 			</Modal>
 		</>
     );
