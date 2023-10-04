@@ -1,0 +1,28 @@
+.scanContainer {
+  zoom:0.2
+}
+.cell-phone{
+  top: 0px;
+  right:100px;
+   z-index: 1;
+}
+.cell-phone .scan{
+  animation: scanvisibility 3s linear infinite;
+}
+.cell-phone .scan .redline{
+  animation: scanning 3s linear infinite;
+}
+
+@keyframes scanning{
+  0%{transform: translateY(0px)}
+  25%{transform: translateY(94px);}
+  50%{transform: translateY(0px);}
+  75%{transform: translateY(94px);}
+  100%{transform: translateY(0px);}
+}
+
+@keyframes scanvisibility{
+  0%{visibility:visible;}
+  51%{visibility:visible;}
+  100%{visibility:visible;}
+}

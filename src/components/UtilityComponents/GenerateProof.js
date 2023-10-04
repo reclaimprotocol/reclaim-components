@@ -2,8 +2,8 @@ import ReclaimSDK from '@reclaimprotocol/reclaim-client-sdk';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../designComponents/Modal';
-import QRCode from "react-qr-code";
-
+import ProofBox from './ProofBox';
+import { PROOF_STATE } from '../../util/constants';
 import { ErrorHandler } from '../../util';
 
 const GenerateProof = React.forwardRef(function GenerateProof(props, ref) {
@@ -14,7 +14,7 @@ const {
 	onProofSubmissionFailed
 } = props;
 
-	const [sessionState, setSessionState] = useState('IDLE');
+	const [proofState, setProofState] = useState(PROOF_STATE.IDLE);
 	const [session, setSession] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,44 +30,42 @@ const {
 
     async function generateSession () {
         const userId = userID;
-        setSessionState('PROCESSING');
+        setProofState(PROOF_STATE.GENERATING);
         const session = await reclaimSDK.generateSession({
             userId,
             onProofSubmissionSuccess: () => {
-                setSessionState('COMPLETED');
+                setProofState(PROOF_STATE.SUBMISSION_SUCCESS);
 								onProofSubmission();
             },
             onError: (error) => {
-                setSessionState('FAILED');
+                setProofState(PROOF_STATE.SUBMISSION_FAILED);
                 console.log(error)
 								onProofSubmissionFailed();
             }
         })
-        setSessionState('GENERATED');
+        setProofState(PROOF_STATE.GENERATED);
         if (session) {
             setSession(session);
-            setIsModalOpen(true);
         }
     }
 
 	// render
 
 
+	const handleClickToTrigger = () => {
+		setIsModalOpen(true);
+		generateSession();
+	}
+
 	const renderButton = () => {
-		if (sessionState === 'IDLE' || sessionState === 'FAILED' ) return <button className='reclaim-ds-button-generate-qr' onClick={generateSession}>Generate QR</button>;
-		return <button className='reclaim-ds-button-generate-qr' disabled={sessionState==='PROCESSING'} onClick={()=> setIsModalOpen(true)}>View QR</button>;
-	};
-	const renderAcknowledgement = () => {
-		if (sessionState === 'PROCESSING') return <span className='reclaim-generate-proof-ack'>Generating...</span>;
-		if (sessionState === 'COMPLETED') return <span className='reclaim-generate-proof-ack'>Proof Submitted Successfully</span>;
-		if (sessionState === 'FAILED') return <span className='reclaim-generate-proof-ack'>Proof Submission Failed</span>;
+		if (proofState === PROOF_STATE.IDLE || proofState === PROOF_STATE.SUBMISSION_FAILED ) return <button className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</button>;
+		return <button className='reclaim-ds-button-generate-qr' disabled={proofState===PROOF_STATE.GENERATING} onClick={()=> setIsModalOpen(true)}>View QR</button>;
 	};
 
 	const QRLink = session && session.link || '';
 	return (
 		<>
 			<div>{renderButton()}</div>
-			{renderAcknowledgement()}
 			<Modal
 				isOpen={isModalOpen}
 				onClose={() => {setIsModalOpen(false)}}
@@ -75,7 +73,7 @@ const {
 				className='Reclaim-ds-modal'
 				role='dialog'
 			>
-				<QRCode value={QRLink} size={200} />
+				<ProofBox QRLink={QRLink} proofState={proofState} />
 			</Modal>
 		</>
     );
