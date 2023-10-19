@@ -8,4 +8,4 @@ export type TimerRef = Ref<HTMLDivElement>;
 
 export interface ProgressBarProps {
   width: string
-}
+};

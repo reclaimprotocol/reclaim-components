@@ -15,7 +15,7 @@ const StyledModalHeading = styled.h3`
 	line-height: 1.28;
 	letter-spacing: -0.12px;
   line-height: 20px;
-  margin-bottom: 12px;
+  margin: 16px 0px !important;
   font-family: sans-serif;
 `;
 

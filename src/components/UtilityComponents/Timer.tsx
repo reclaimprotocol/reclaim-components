@@ -1,7 +1,7 @@
-import React, { useState, useEffect, type ReactNode  } from 'react';
+import React, { useState, useEffect, type ReactNode } from 'react';
 import Flex from '../designComponents/Flex';
 import styled from 'styled-components';
-import { type TimerProps , type ProgressBarProps} from '../../types/UtilityComponents/Timer';
+import { type TimerProps, type ProgressBarProps } from '../../types/UtilityComponents/Timer';
 
 const StyledProgressBarContainer = styled.div<ProgressBarProps>`
   background-color: #d8d8d8;
@@ -64,7 +64,7 @@ const Timer = (props: TimerProps): ReactNode => {
     };
   }, [durationInSeconds]);
 
-const barPercentage = (remainingTime / duration) * 100;
+  const barPercentage = (remainingTime / duration) * 100;
   return (
     <Flex width='100%'>
       <StyledProgressBarContainer width='100%'>

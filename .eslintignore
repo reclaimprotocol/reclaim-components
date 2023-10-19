@@ -1,0 +1,4 @@
+node_modules/*
+dist/*
+src/packages/**/dist/*
+src/packages/**/node_modules/*
