@@ -10,25 +10,24 @@ import image from '@rollup/plugin-image';
 import postcss from 'rollup-plugin-postcss';
 import { dts } from 'rollup-plugin-dts';
 import copy from 'rollup-plugin-copy';
-import packageJson from './package.json';
 
 export default [
   {
     input: 'src/index.tsx',
     output: [
       {
-        file: 'dist/iife/index.js',
+        file: 'build/dist/iife/index.js',
         format: 'iife',
         sourcemap: true
       },
       {
-        file: packageJson.main,
+        file: 'build/dist/cjs/index.js',
         format: 'cjs',
         sourcemap: true,
         name: 'react-lib'
       },
       {
-        file: packageJson.module,
+        file: 'build/dist/esm/index.js',
         format: 'esm',
         sourcemap: true
       }
@@ -63,11 +62,11 @@ export default [
   },
   {
     input: './src/types/index.d.ts',
-    output: [{ file: 'dist/types/index.d.ts', format: 'es' }],
+    output: [{ file: 'build/dist/types/index.d.ts', format: 'es' }],
     plugins: [dts(),
       copy({
         targets: [
-          { src: 'package.json', dest: 'dist' } // Copy package.json to the dist directory
+          { src: 'package.json', dest: 'build/' } // Copy package.json to the dist directory
         ]
       })
     ]
