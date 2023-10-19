@@ -23,12 +23,13 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
     if (proofState === PROOF_STATE.GENERATED) setIsQRGenerated(true);
   }, [proofState]);
 
+  // function that renders proof submission state, currently success and failed and loader
   const renderProofSubmissionState = (): ReactNode => {
     if (proofState === PROOF_STATE.SUBMISSION_SUCCESS) {
-      return <StyledFlex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' /> Submission Successful </StyledFlex>;
+      return <StyledFlex className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' /> Submission Successful </StyledFlex>;
     }
     if (proofState === PROOF_STATE.SUBMISSION_FAILED) {
-      return <StyledFlex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' /> Submission Failed</StyledFlex>; ;
+      return <StyledFlex className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' /> Submission Failed</StyledFlex>; ;
     }
     if (isQRGenerated) {
       return (

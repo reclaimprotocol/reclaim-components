@@ -67,8 +67,8 @@ const Timer = (props: TimerProps): ReactNode => {
   const barPercentage = (remainingTime / duration) * 100;
   return (
     <Flex width='100%'>
-      <StyledProgressBarContainer width='100%'>
-        <StyledProgressBar width={barPercentage + '%'} />
+      <StyledProgressBarContainer className='reclaim-ds-progress-bar-container' width='100%'>
+        <StyledProgressBar className='reclaim-ds-progress-bar' width={barPercentage + '%'} />
         <StyledFlex>Time remains: <b>&nbsp;{minutes}:{seconds}&nbsp;</b>min</StyledFlex>
       </StyledProgressBarContainer>
     </Flex>

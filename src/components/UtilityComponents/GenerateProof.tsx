@@ -7,6 +7,7 @@ import { PROOF_STATE } from '../../util/constants';
 import { ErrorHandler } from '../../util';
 import { type GenerateProofProps, type GenerateProofRef, type sessionInterface } from '../../types/UtilityComponents/generateProof';
 
+// The generateProof component that abstracts out entire reaclaim implementation
 const GenerateProof = React.forwardRef(function GenerateProof (props: GenerateProofProps, ref: GenerateProofRef) {
   const {
     appID,
@@ -15,6 +16,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
     onProofSubmissionFailed
   } = props;
 
+  // local states
   const [proofState, setProofState] = useState(PROOF_STATE.IDLE);
   const [session, setSession] = useState<sessionInterface | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +29,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
     ErrorHandler('userID required: Please provide unique user ID to GenerateProof component.');
   }
 
+  // Instantiate ReclaimSDK with the appID.
   const reclaimSDK = new ReclaimSDK(appID);
 
   async function generateSession (): Promise<void> {

@@ -35,6 +35,7 @@ export interface FlexProps {
   padding?: string;
   style?: CSSProperties;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export type FlexRef = Ref<HTMLDivElement>;

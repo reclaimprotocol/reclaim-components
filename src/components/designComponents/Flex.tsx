@@ -54,7 +54,8 @@ Flex.defaultProps = {
   minHeight: 'auto',
   maxHeight: 'none',
   margin: '0',
-  padding: '0'
+  padding: '0',
+  className: ''
 };
 
 Flex.propTypes = {
@@ -104,7 +105,8 @@ Flex.propTypes = {
   minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   margin: PropTypes.string,
-  padding: PropTypes.string
+  padding: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Flex;
