@@ -58,8 +58,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   }
 
   const renderButton = (): JSX.Element => {
-    if (proofState === PROOF_STATE.IDLE || proofState === PROOF_STATE.SUBMISSION_FAILED) return <button className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</button>;
-    return <button className='reclaim-ds-button-generate-qr' disabled={proofState === PROOF_STATE.GENERATING} onClick={() => { setIsModalOpen(true); }}>View QR</button>;
+    return <button className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</button>;
   };
 
   const QRLink = (session !== null && typeof session !== 'undefined') ? session.link : '';

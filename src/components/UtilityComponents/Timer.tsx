@@ -1,10 +1,30 @@
-import React, { useState, useEffect, type ReactNode } from 'react';
+import React, { useState, useEffect, type ReactNode  } from 'react';
 import Flex from '../designComponents/Flex';
 import styled from 'styled-components';
-import { type TimerProps } from '../../types/UtilityComponents/Timer';
-const StyledTimerText = styled.span`
-  font-size: 2em;
-  color: #9d0000;
+import { type TimerProps , type ProgressBarProps} from '../../types/UtilityComponents/Timer';
+
+const StyledProgressBarContainer = styled.div<ProgressBarProps>`
+  background-color: #d8d8d8;
+  border-radius: 4px;
+  position: relative;
+  margin: 16px 0;
+  height: 8px;
+  width: ${(props) => props.width};
+`;
+
+const StyledProgressBar = styled.div<ProgressBarProps>`
+  background: #0099ff;
+  border-radius: 4px;
+  height: 100%;
+  transition: 1s ease 0.3s;
+  width: ${(props) => props.width};
+`;
+
+const StyledFlex = styled(Flex)`
+  font-family: 'circular';
+  color: #8e8e8e;
+  font-size: 1em;
+  margin-top: 12px;
 `;
 
 const Timer = (props: TimerProps): ReactNode => {
@@ -14,6 +34,7 @@ const Timer = (props: TimerProps): ReactNode => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(durationInSeconds);
 
   useEffect(() => {
     const updateTimer = (): void => {
@@ -24,6 +45,7 @@ const Timer = (props: TimerProps): ReactNode => {
       setHours(hours);
       setMinutes(minutes);
       setSeconds(seconds);
+      setRemainingTime(durationInSeconds);
     };
 
     updateTimer();
@@ -42,10 +64,13 @@ const Timer = (props: TimerProps): ReactNode => {
     };
   }, [durationInSeconds]);
 
+const barPercentage = (remainingTime / duration) * 100;
   return (
-    <Flex width='135px'>
-      <StyledTimerText>{String(minutes).padStart(2, '0')}:</StyledTimerText>
-      <StyledTimerText>{String(seconds).padStart(2, '0')}</StyledTimerText>
+    <Flex width='100%'>
+      <StyledProgressBarContainer width='100%'>
+        <StyledProgressBar width={barPercentage + '%'} />
+        <StyledFlex>Time remains: <b>&nbsp;{minutes}:{seconds}&nbsp;</b>min</StyledFlex>
+      </StyledProgressBarContainer>
     </Flex>
   );
 };

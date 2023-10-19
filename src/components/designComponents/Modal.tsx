@@ -115,7 +115,7 @@ const Modal = React.forwardRef(function Modal (props: ModalProps, ref: Ref<HTMLD
       overflow: 'hidden',
       background: 'none',
       padding: 0,
-      maxWidth: '648px',
+      maxWidth: '275px',
       width: 'max-content'
     }
   };

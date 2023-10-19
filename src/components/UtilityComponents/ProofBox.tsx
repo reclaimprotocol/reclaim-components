@@ -1,4 +1,5 @@
 import React, { useEffect, useState, type ReactNode } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import QRCode from 'react-qr-code';
 import Timer from './Timer';
@@ -10,6 +11,9 @@ import UploadSuccess from '../designComponents/Icon/upload-success';
 import { type ProofBoxProps, type ProofBoxRef } from '../../types/UtilityComponents/ProofBox';
 
 const SESSION_TIMEOUT = 300;
+const StyledFlex = styled(Flex)`
+  font-family: 'circular';
+`;
 
 const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: ProofBoxRef) {
   const { QRLink, size, proofState } = props;
@@ -21,16 +25,16 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
 
   const renderProofSubmissionState = (): ReactNode => {
     if (proofState === PROOF_STATE.SUBMISSION_SUCCESS) {
-      return <Flex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' /> Submission Successful </Flex>;
+      return <StyledFlex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' /> Submission Successful </StyledFlex>;
     }
     if (proofState === PROOF_STATE.SUBMISSION_FAILED) {
-      return <Flex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' /> Submission Failed</Flex>; ;
+      return <StyledFlex margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' /> Submission Failed</StyledFlex>; ;
     }
     if (isQRGenerated) {
       return (
-					<Flex margin='auto' direction='row' width='200px' justifyContent='space-between'>
+					<StyledFlex margin='auto' direction='row' width='200px' justifyContent='space-between'>
 						<Timer duration={SESSION_TIMEOUT} />
-					</Flex>
+					</StyledFlex>
       );
     }
   };

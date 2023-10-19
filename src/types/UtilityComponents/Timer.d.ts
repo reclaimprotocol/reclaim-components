@@ -5,3 +5,7 @@ export interface TimerProps {
 }
 
 export type TimerRef = Ref<HTMLDivElement>;
+
+export interface ProgressBarProps {
+  width: string
+}
