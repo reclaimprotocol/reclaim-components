@@ -59,7 +59,8 @@ export default [
     plugins: [dts(),
       copy({
         targets: [
-          { src: 'package.json', dest: 'build/' } // Copy package.json to the dist directory
+          { src: 'package.json', dest: 'build/' }, // Copy package.json to the dist directory
+          { src: 'README.md', dest: 'build/' } // Copy package.json to the dist directory
         ]
       })
     ]
