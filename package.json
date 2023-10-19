@@ -1,25 +1,15 @@
 {
-  "name": "reclaim-components",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@reclaimprotocol/reclaim-client-sdk": "^0.0.10",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
-    "react-qr-code": "^2.0.12",
-    "react-scripts": "5.0.1",
-    "styled-components": "^6.0.8",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "@reclaimprotocol/react-components",
+  "version": "0.0.1-beta.1",
+  "description": "",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "rollup -c rollup-dev.config.mjs -w --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs",
+    "test:lint": "eslint './src/**/*'"
   },
   "eslintConfig": {
     "extends": [
@@ -27,16 +17,55 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-image": "^3.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.2",
+    "@rollup/plugin-replace": "^5.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/lodash": "^4.14.199",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
+    "@types/react-modal": "^3.16.1",
+    "@types/styled-components": "^5.1.28",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "babel-plugin-styled-components": "^2.1.4",
+    "dts-bundle": "^0.7.3",
+    "eslint": "^8.51.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^4.0.0",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-serve": "^2.0.2",
+    "serve": "^14.2.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@reclaimprotocol/reclaim-client-sdk": "^0.0.10",
+    "lodash": "^4.17.21",
+    "react-modal": "^3.16.1",
+    "react-qr-code": "^2.0.12",
+    "styled-components": "^6.0.8"
   }
 }

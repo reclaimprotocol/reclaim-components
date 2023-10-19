@@ -1,0 +1,31 @@
+import React from 'react';
+import './ScanQRAnimation.css';
+
+const ScanQRAnimation: React.FC = () => {
+  return (
+    <div className="scanContainer">
+      <svg className="cell-phone" version="1.1" id="Layer_1" x="0px" y="0px"
+        width="177.5px" height="275.5px" viewBox="0 0 177.5 275.5" enableBackground="new 0 0 177.5 275.5">
+        <g id="icon">
+          <path id="base" fill="#444" d="M143.6,256h-108c-8.8,0-16-7.2-16-16V32c0-8.8,7.2-16,16-16h108c8.8,0,16,7.2,16,16v208
+                                          C159.6,248.8,152.4,256,143.6,256z"/>
+          <rect id="screen" x="31.6" y="52" fill="#FFFFFF" width="116" height="168" />
+          <circle id="nav" fill="rgba(0,0,0,0)" cx="89.199" cy="239.2" r="8" />
+          <path id="speaker" fill="rgba(0,0,0,0)" d="M105.6,38h-32c-2,0-4-1.6-4-4l0,0c0-2,2-4,4-4h32c2.399,0,4,2,4,4l0,0
+                                             C109.6,36.4,107.999,38,105.6,38z"/>
+        </g>
+        <g className="scan">
+          <path d="M67.239,157.512v8.604h-8.604v-8.604H67.239z M67.239,105.884v8.605h-8.604v-8.605H67.239z M118.866,105.884v8.605h-8.604
+                 v-8.605H118.866z M50.03,174.653h25.814v-25.747H50.03V174.653z M50.03,123.093h25.814V97.279H50.03V123.093z M101.657,123.093
+                 h25.814V97.279h-25.814V123.093z M84.448,140.302v43.023H41.425v-43.023H84.448z M118.866,174.721v8.604h-8.604v-8.604H118.866z
+                 M136.075,174.721v8.604h-8.604v-8.604H136.075z M136.075,140.302v25.814h-25.813v-8.604h-8.605v25.813h-8.604v-43.023h25.814
+                 v8.604h8.604v-8.604H136.075z M84.448,88.675v43.023H41.425V88.675H84.448z M136.075,88.675v43.023H93.052V88.675H136.075z"/>
+          <line className="redline" fill="none" stroke="#C10000" strokeWidth="8" strokeMiterlimit="10" x1="36.425" y1="88.675" x2="141.759" y2="88.675" />
+        </g>
+      </svg>
+    </div>
+
+  );
+};
+
+export default ScanQRAnimation;
