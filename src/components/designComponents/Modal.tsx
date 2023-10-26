@@ -13,6 +13,7 @@ const BACKGROUND_MODAL_BACKDROP = 'rgba(26, 26, 26, 0.6)';
 
 const StyledModalHeading = styled.h3`
 	font-size: 16px;
+  font-weight: 600;
 	line-height: 1.28;
 	letter-spacing: -0.12px;
   line-height: 20px;

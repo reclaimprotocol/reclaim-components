@@ -13,6 +13,7 @@ import { type ProofBoxProps, type ProofBoxRef } from '../../types/UtilityCompone
 const SESSION_TIMEOUT = 300;
 const StyledFlex = styled(Flex)`
   font-family: 'circular';
+  color: #000000;
 `;
 
 const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: ProofBoxRef) {
@@ -41,7 +42,7 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
   };
 
   return (
-        <Flex direction='column' margin='16px 0px' ref={ref}>
+        <Flex direction='column' margin='4px 0px 16px 0px' ref={ref}>
 						<Flex direction='column' rowGap='16px'>
 							{ !isQRGenerated && (<Loader height={200} width={100} color='#c5e4ff' />)}
 							{ isQRGenerated && (<QRCode value={QRLink} size={size} style={{ width: '100%' }} />)}

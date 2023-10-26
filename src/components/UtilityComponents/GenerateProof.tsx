@@ -19,6 +19,7 @@ const StyledGenerateProofButton = styled.button`
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.65);
   border-radius: 4px;
   color: #000000;
+  cursor: pointer;
 `;
 
 // The generateProof component that abstracts out entire reaclaim implementation
