@@ -17,6 +17,7 @@ const StyledModalHeading = styled.h3`
   line-height: 20px;
   margin: 16px 0px !important;
   font-family: sans-serif;
+  color: #000000;
 `;
 
 const StyledHeadingWrapper = styled.div`
@@ -30,7 +31,7 @@ const StyledHeadingWrapper = styled.div`
 const StyledCloseButtonWrapper = styled.span`
   position: relative;
   left: 16px;
-  top: 4px;
+  top: 2px;
 `;
 const StyledModalCloseBtn = styled.button`
 	background-color: transparent;

@@ -1,4 +1,5 @@
 import ReclaimSDK from '@reclaimprotocol/reclaim-client-sdk';
+import styled from 'styled-components';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../designComponents/Modal';
@@ -6,6 +7,18 @@ import ProofBox from './ProofBox';
 import { PROOF_STATE } from '../../util/constants';
 import { ErrorHandler } from '../../util';
 import { type GenerateProofProps, type GenerateProofRef, type sessionInterface } from '../../types/UtilityComponents/generateProof';
+
+const StyledGenerateProofButton = styled.button`
+  background-color: #f7f7e1;
+  height: 32px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+`;
 
 // The generateProof component that abstracts out entire reaclaim implementation
 const GenerateProof = React.forwardRef(function GenerateProof (props: GenerateProofProps, ref: GenerateProofRef) {
@@ -61,7 +74,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   }
 
   const renderButton = (): JSX.Element => {
-    return <button className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</button>;
+    return <StyledGenerateProofButton className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</StyledGenerateProofButton>;
   };
 
   const QRLink = (session !== null && typeof session !== 'undefined') ? session.link : '';
