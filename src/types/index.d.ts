@@ -1,5 +1,10 @@
-import { type GenerateProofProps } from './UtilityComponents/generateProof';
+// index.d.ts
+// Reference: ./UtilityComponents/generateProof.d.ts
+import { type GenerateProof } from './UtilityComponents/generateProof';
+// Reference: ./UtilityComponents/ProofBox.d.ts
+import { type ProofBox } from './UtilityComponents/ProofBox';
 
 export {
-  type GenerateProofProps
+  type GenerateProof,
+  type ProofBox
 };

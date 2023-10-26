@@ -53,10 +53,11 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
 export default ProofBox;
 
 ProofBox.defaultProps = {
-  size: 200
+  size: 200,
+  proofState: PROOF_STATE.GENERATED
 };
 ProofBox.propTypes = {
   QRLink: PropTypes.string.isRequired,
   size: PropTypes.number,
-  proofState: PropTypes.string.isRequired
+  proofState: PropTypes.oneOf(Object.values(PROOF_STATE))
 };

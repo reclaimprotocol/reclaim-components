@@ -26,3 +26,5 @@ export interface sessionInterface {
   sessionId: string;
   link: string;
 };
+
+export const GenerateProof: React.FC<GenerateProofProps>;

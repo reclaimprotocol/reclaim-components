@@ -22,8 +22,7 @@ export default [
       {
         file: 'build/dist/cjs/index.js',
         format: 'cjs',
-        sourcemap: true,
-        name: 'react-lib'
+        sourcemap: true
       },
       {
         file: 'build/dist/esm/index.js',
@@ -50,7 +49,12 @@ export default [
       postcss({
         extensions: ['.css']
       }),
-      terser()
+      terser({
+        format: {
+          comments: false // Remove comments from the output
+        },
+        sourceMap: false // Disable source maps for production build
+      })
     ]
   },
   {

@@ -1,6 +1,6 @@
 {
   "name": "@reclaimprotocol/react-components",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.8",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "rollup -c rollup-dev.config.mjs -w --bundleConfigAsCjs",
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "rm -rf build && rollup -c --bundleConfigAsCjs",
     "test:lint": "eslint './src/**/*'"
   },
   "eslintConfig": {
