@@ -2,6 +2,7 @@ import React, { useEffect, type Ref } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
+import CloseIcon from './Icon/close-stroke-icon';
 import {
   type ModalHeaderProps,
   type ModalProps,
@@ -34,9 +35,14 @@ const StyledCloseButtonWrapper = styled.span`
   top: 2px;
 `;
 const StyledModalCloseBtn = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
 	background-color: transparent;
 	color: #6B6B6B;
-	padding: 4px 12px 6px;
+	padding: 0;
 	BORDER: transparent;
 	font-size: 24px;
 	border-radius: 4px;
@@ -58,7 +64,7 @@ const ModalHeader = React.forwardRef(function ModalHeader (props: ModalHeaderPro
 			</StyledModalHeading>
 			<StyledCloseButtonWrapper>
           <StyledModalCloseBtn onClick={onClose}>
-						x
+						<CloseIcon />
 					</StyledModalCloseBtn>
         </StyledCloseButtonWrapper>
     </StyledHeadingWrapper>
