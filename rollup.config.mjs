@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
-import terser from '@rollup/plugin-terser';
 import image from '@rollup/plugin-image';
 import postcss from 'rollup-plugin-postcss';
 import autoExternal from 'rollup-plugin-auto-external';
@@ -22,7 +21,10 @@ export default [
       {
         file: 'build/dist/cjs/index.js',
         format: 'cjs',
-        sourcemap: true
+        sourcemap: true,
+        name: 'react-lib',
+        interop: 'auto'
+
       },
       {
         file: 'build/dist/esm/index.js',

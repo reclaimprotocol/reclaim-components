@@ -28,8 +28,15 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
     appID,
     userID,
     onProofSubmission,
-    onProofSubmissionFailed
+    onProofSubmissionFailed,
+    customize
   } = props;
+
+  const {
+    triggerButton: triggerButtonCustomConfig,
+    modalHeader: modalHeaderCustomConfig,
+    proofSubmissionDetails: proofSubmissionDetailsCustomConfig
+  } = customize ?? {};
 
   // local states
   const [proofState, setProofState] = useState(PROOF_STATE.IDLE);
@@ -76,7 +83,9 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   }
 
   const renderButton = (): JSX.Element => {
-    return <StyledGenerateProofButton className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger}>Generate Proof</StyledGenerateProofButton>;
+    const currentTriggerBtnText = ((triggerButtonCustomConfig?.text) != null) ? triggerButtonCustomConfig?.text : 'Generate Proof';
+    const triggerButtonCustomStyle = ((triggerButtonCustomConfig?.style) != null) ? triggerButtonCustomConfig?.style : {};
+    return <StyledGenerateProofButton className='reclaim-ds-button-generate-qr' onClick={handleClickToTrigger} style={triggerButtonCustomStyle}>{currentTriggerBtnText}</StyledGenerateProofButton>;
   };
 
   const QRLink = (session !== null && typeof session !== 'undefined') ? session.link : '';
@@ -89,8 +98,9 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
 				onClose={() => { setIsModalOpen(false) }}
 				className='Reclaim-ds-modal'
 				role='dialog'
+        modalHeaderCustomConfig={modalHeaderCustomConfig}
 			>
-				<ProofBox QRLink={QRLink} proofState={proofState} />
+				<ProofBox QRLink={QRLink} proofState={proofState} proofSubmissionDetailsCustomConfig={proofSubmissionDetailsCustomConfig} />
 			</Modal>
 		</>
   );
@@ -98,14 +108,16 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
 
 GenerateProof.defaultProps = {
   onProofSubmission: () => {},
-  onProofSubmissionFailed: () => {}
+  onProofSubmissionFailed: () => {},
+  customize: {}
 };
 
 GenerateProof.propTypes = {
   appID: PropTypes.string.isRequired,
   userID: PropTypes.string.isRequired,
   onProofSubmission: PropTypes.func,
-  onProofSubmissionFailed: PropTypes.func
+  onProofSubmissionFailed: PropTypes.func,
+  customize: PropTypes.object
 
 };
 

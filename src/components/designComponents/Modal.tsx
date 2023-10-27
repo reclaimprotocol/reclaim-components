@@ -26,14 +26,15 @@ const StyledHeadingWrapper = styled.div`
 	display: flex;
 	flex: 1;
 	justify-content: space-between;
-	gap: 16px;
+	gap: 0px;
 	padding: 12px 0px 8px 0px;
 `;
 
 const StyledCloseButtonWrapper = styled.span`
+  width: 8px;
+  height: 24px;
   position: relative;
-  left: 16px;
-  top: 2px;
+  top: 4px;
 `;
 const StyledModalCloseBtn = styled.button`
   display: flex;
@@ -56,12 +57,17 @@ const StyledModalCloseBtn = styled.button`
 const ModalHeader = React.forwardRef(function ModalHeader (props: ModalHeaderProps, ref: Ref<HTMLDivElement>) {
   const {
     heading,
-    onClose
+    onClose,
+    modalHeaderCustomConfig
   } = props;
+
+  const currentModalHeaderText = ((modalHeaderCustomConfig?.text) != null) ? modalHeaderCustomConfig?.text : heading;
+  const modalHeadingCustomStyle = ((modalHeaderCustomConfig?.style) != null) ? modalHeaderCustomConfig?.style : {};
+
   return (
     <StyledHeadingWrapper ref={ref}>
-      <StyledModalHeading>
-				{heading}
+      <StyledModalHeading style={modalHeadingCustomStyle}>
+				{currentModalHeaderText}
 			</StyledModalHeading>
 			<StyledCloseButtonWrapper>
           <StyledModalCloseBtn onClick={onClose}>
@@ -73,12 +79,14 @@ const ModalHeader = React.forwardRef(function ModalHeader (props: ModalHeaderPro
 });
 
 ModalHeader.defaultProps = {
-  onClose: () => {}
+  onClose: () => {},
+  modalHeaderCustomConfig: {}
 };
 
 ModalHeader.propTypes = {
   heading: PropTypes.string.isRequired,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  modalHeaderCustomConfig: PropTypes.object
 };
 
 const StyledModal = styled.div`
@@ -102,7 +110,8 @@ const Modal = React.forwardRef(function Modal (props: ModalProps, ref: Ref<HTMLD
     isOpen,
     children,
     id,
-    className
+    className,
+    modalHeaderCustomConfig
   } = props;
 
   const defaultModalStyles: DefaultModalStyles = {
@@ -151,7 +160,7 @@ const Modal = React.forwardRef(function Modal (props: ModalProps, ref: Ref<HTMLD
           className={className}
           ref={ref}
         >
-					<ModalHeader heading='Scan the QR code' onClose={onClose} />
+					<ModalHeader heading='Scan the QR code' onClose={onClose} modalHeaderCustomConfig={modalHeaderCustomConfig} />
           {children}
         </StyledModal>
       </ReactModal>
@@ -160,7 +169,8 @@ const Modal = React.forwardRef(function Modal (props: ModalProps, ref: Ref<HTMLD
 
 Modal.defaultProps = {
   id: '',
-  className: ''
+  className: '',
+  modalHeaderCustomConfig: {}
 };
 
 Modal.propTypes = {
@@ -168,7 +178,8 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
   id: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  modalHeaderCustomConfig: PropTypes.object
 };
 
 Modal.displayName = 'Modal';

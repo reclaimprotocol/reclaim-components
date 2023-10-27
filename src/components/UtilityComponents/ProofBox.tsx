@@ -17,8 +17,12 @@ const StyledFlex = styled(Flex)`
 `;
 
 const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: ProofBoxRef) {
-  const { QRLink, size, proofState } = props;
+  const { QRLink, size, proofState, proofSubmissionDetailsCustomConfig } = props;
   const [isQRGenerated, setIsQRGenerated] = useState(false);
+
+  const currentSubmissionSuccessText = ((proofSubmissionDetailsCustomConfig?.successText) != null) ? proofSubmissionDetailsCustomConfig?.successText : ' Submission Successful';
+  const currentSubmissionFailureText = ((proofSubmissionDetailsCustomConfig?.failureText) != null) ? proofSubmissionDetailsCustomConfig?.failureText : ' Submission Failed';
+  const triggerButtonCustomStyle = ((proofSubmissionDetailsCustomConfig?.style) != null) ? proofSubmissionDetailsCustomConfig?.style : {};
 
   useEffect(() => {
     if (proofState === PROOF_STATE.GENERATED) setIsQRGenerated(true);
@@ -27,14 +31,14 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
   // function that renders proof submission state, currently success and failed and loader
   const renderProofSubmissionState = (): ReactNode => {
     if (proofState === PROOF_STATE.SUBMISSION_SUCCESS) {
-      return <StyledFlex className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' /> Submission Successful </StyledFlex>;
+      return <StyledFlex style={triggerButtonCustomStyle} className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadSuccess size='m' color='#009a00' />{currentSubmissionSuccessText}</StyledFlex>;
     }
     if (proofState === PROOF_STATE.SUBMISSION_FAILED) {
-      return <StyledFlex className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' /> Submission Failed</StyledFlex>; ;
+      return <StyledFlex style={triggerButtonCustomStyle} className='reclaim-ds-proof-state-text' margin='auto' width='200px' alignItems='center' columnGap='6px'><UploadFail size='m' color='#a40000' />{currentSubmissionFailureText}</StyledFlex>; ;
     }
     if (isQRGenerated) {
       return (
-					<StyledFlex margin='auto' direction='row' width='200px' justifyContent='space-between'>
+					<StyledFlex style={triggerButtonCustomStyle} margin='auto' direction='row' width='200px' justifyContent='space-between'>
 						<Timer duration={SESSION_TIMEOUT} />
 					</StyledFlex>
       );
@@ -55,10 +59,12 @@ export default ProofBox;
 
 ProofBox.defaultProps = {
   size: 200,
-  proofState: PROOF_STATE.GENERATED
+  proofState: PROOF_STATE.GENERATED,
+  proofSubmissionDetailsCustomConfig: {}
 };
 ProofBox.propTypes = {
   QRLink: PropTypes.string.isRequired,
   size: PropTypes.number,
-  proofState: PropTypes.oneOf(Object.values(PROOF_STATE))
+  proofState: PropTypes.oneOf(Object.values(PROOF_STATE)),
+  proofSubmissionDetailsCustomConfig: PropTypes.object
 };

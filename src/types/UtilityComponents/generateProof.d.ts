@@ -1,8 +1,18 @@
+import { type proofSubmissionDetailsCustomConfig } from './ProofBox';
+import { type modalHeaderCustomConfig } from '../designComponents/Modal';
 export interface GenerateProofProps {
   appID: string;
   userID: string;
   onProofSubmission?: () => void;
   onProofSubmissionFailed?: () => void;
+  customize?: {
+    triggerButton?: {
+      text?: string;
+      style?: object;
+    },
+    modalHeader?: modalHeaderCustomConfig
+    proofSubmissionDetails?: proofSubmissionDetailsCustomConfig
+  }
 }
 
 export type GenerateProofRef = Ref<HTMLDivElement>;
