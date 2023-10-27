@@ -5,6 +5,7 @@ import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
 import image from '@rollup/plugin-image';
 import postcss from 'rollup-plugin-postcss';
+import terser from '@rollup/plugin-terser';
 import autoExternal from 'rollup-plugin-auto-external';
 import { dts } from 'rollup-plugin-dts';
 import copy from 'rollup-plugin-copy';
