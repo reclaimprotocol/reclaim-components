@@ -1,35 +1,33 @@
-# Reclaim Components
-## Summary
+# Reclaim Connect
+## Overview
 
-Reclaim Components is a versatile package designed to simplify the complex implementation of reclaim functionality in your React applications. This package provides a set of pre-built React utility components that offer a hassle-free way to handle various aspects of reclaim sdk, and it is especially handy for popular, repetitive use cases.
+## Integrate Reclaim Connect in Your Front End
+Reclaim Connect exposes a set of React components that can be integrated into your front end application. It is available as an NPM package. To install it, run the following command in your project directory:
 
-## Installation
-To get started with Reclaim Components, you can install it using npm or yarn:
-
-```bash
-npm install @reclaimprotocol/react-components
-# or
-yarn add @reclaimprotocol/react-components
+```bash copy showLineNumbers
+npm install @reclaimprotocol/reclaim-connect-react
 ```
 
-## Usage
-Incorporating Reclaim Components into your React application is straightforward. Here's a basic example of how to use it:
+### GenerateProof Component
+The GenerateProof component enables you to request data from users. It renders a button that, when clicked, opens a modal with a QR code. Users can scan the QR code with the Reclaim mobile app to submit the requested data. The component also provides a callback function that you can use to execute logic when the proof is successfully submitted.
+
+To use the GenerateProof component, follow these steps:
+
+1. Import the component into your React application:
 
 ```tsx
-import React, { type ReactNode } from 'react';
-import { GenerateProof } from '@reclaimprotocol/react-components';
-
-function App (): ReactNode {
-  return (
-    <GenerateProof
-      appID='6d6c04eb-237b-4599-8797-94d48b0ac612'
-      userID='dasq2easdase-asdq2e3'
-      onProofSubmission={() => {}}
-      onProofSubmissionFailed={() => {}}
-    />
-  );
-}
-
-export default App;
+import { GenerateProof } from '@reclaimprotocol/reclaim-connect-react';
 ```
 
+2. Add the component to your application's JSX:
+
+```tsx
+<GenerateProof
+  appID='6d6c04eb-237b-4599-8797-94d48b0ac612'
+  userID='dasq2easdase-asdq2e3'
+  onProofSubmission={() => {}}
+  onProofSubmissionFailed={() => {}}
+/>
+```
+
+3. Update the `applicationId` with your own application Id. You can get one by registering your application with Reclaim. Visit [Reclaim Developer Portal](https://dev.reclaimprotocol.org/applications) for more information.
