@@ -6,7 +6,7 @@ import Modal from '../designComponents/Modal';
 import ProofBox from './ProofBox';
 import { PROOF_STATE } from '../../util/constants';
 import { ErrorHandler } from '../../util';
-import { type GenerateProofProps, type GenerateProofRef, type sessionInterface } from '../../types/UtilityComponents/generateProof';
+import { type GenerateProofProps, type GenerateProofRef, type sessionInterface, type Proof } from '../../types/UtilityComponents/generateProof';
 
 const StyledGenerateProofButton = styled.button`
   background-color: #f7f7e1;
@@ -60,9 +60,9 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
     setProofState(PROOF_STATE.GENERATING);
     const session: sessionInterface | undefined = await reclaimSDK.generateSession({
       userId,
-      onProofSubmissionSuccess: () => {
+      onProofSubmissionSuccess: (proofs: Proof[], sessionId: string) => {
         setProofState(PROOF_STATE.SUBMISSION_SUCCESS);
-        if (onProofSubmission !== null && typeof onProofSubmission === 'function') onProofSubmission();
+        if (onProofSubmission !== null && typeof onProofSubmission === 'function') onProofSubmission(proofs, sessionId);
       },
       onError: (error) => {
         setProofState(PROOF_STATE.SUBMISSION_FAILED);
@@ -110,6 +110,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
 });
 
 GenerateProof.defaultProps = {
+  userID: '',
   onProofSubmission: () => {},
   onProofSubmissionFailed: () => {},
   onSessionCreation: () => {},
@@ -118,7 +119,7 @@ GenerateProof.defaultProps = {
 
 GenerateProof.propTypes = {
   appID: PropTypes.string.isRequired,
-  userID: PropTypes.string.isRequired,
+  userID: PropTypes.string,
   onProofSubmission: PropTypes.func,
   onProofSubmissionFailed: PropTypes.func,
   onSessionCreation: PropTypes.func,

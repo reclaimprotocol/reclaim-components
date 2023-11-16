@@ -7,9 +7,9 @@ export interface sessionInterface {
 };
 export interface GenerateProofProps {
   appID: string;
-  userID: string;
+  userID?: string;
   onSessionCreation?: (session: sessionInterface | undefined) => void;
-  onProofSubmission?: () => void;
+  onProofSubmission?: (proofs: Proof[], sessionId: string) => void;
   onProofSubmissionFailed?: () => void;
   customize?: {
     triggerButton?: {
