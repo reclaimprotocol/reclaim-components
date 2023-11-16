@@ -1,8 +1,14 @@
 import { type proofSubmissionDetailsCustomConfig } from './ProofBox';
 import { type modalHeaderCustomConfig } from '../designComponents/Modal';
+
+export interface sessionInterface {
+  sessionId: string;
+  link: string;
+};
 export interface GenerateProofProps {
   appID: string;
   userID: string;
+  onSessionCreation?: (session: sessionInterface | undefined) => void;
   onProofSubmission?: () => void;
   onProofSubmissionFailed?: () => void;
   customize?: {
@@ -31,10 +37,5 @@ export type Proof = {
 export type SubmittedProof = {
   parameters: string;
 } & Proof;
-
-export interface sessionInterface {
-  sessionId: string;
-  link: string;
-};
 
 export const GenerateProof: React.FC<GenerateProofProps>;
