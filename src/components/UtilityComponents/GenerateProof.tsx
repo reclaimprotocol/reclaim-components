@@ -27,6 +27,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   const {
     appID,
     userID,
+    onSessionCreation,
     onProofSubmission,
     onProofSubmissionFailed,
     customize
@@ -54,24 +55,25 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   // Instantiate ReclaimSDK with the appID.
   const reclaimSDK = new ReclaimSDK(appID);
 
-  async function generateSession (): Promise<void> {
+  async function generateSession (): Promise<sessionInterface | undefined> {
     const userId = userID;
     setProofState(PROOF_STATE.GENERATING);
-    const session = await reclaimSDK.generateSession({
+    const session: sessionInterface | undefined = await reclaimSDK.generateSession({
       userId,
       onProofSubmissionSuccess: () => {
         setProofState(PROOF_STATE.SUBMISSION_SUCCESS);
-        if (onProofSubmission !== null && typeof onProofSubmission !== 'undefined') onProofSubmission();
+        if (onProofSubmission !== null && typeof onProofSubmission === 'function') onProofSubmission();
       },
       onError: (error) => {
         setProofState(PROOF_STATE.SUBMISSION_FAILED);
         console.log(error)
-        if (onProofSubmissionFailed !== null && typeof onProofSubmissionFailed !== 'undefined') onProofSubmissionFailed();
+        if (onProofSubmissionFailed !== null && typeof onProofSubmissionFailed === 'function') onProofSubmissionFailed();
       }
     })
     setProofState(PROOF_STATE.GENERATED);
     if (session !== null) {
       setSession(session);
+      return session;
     }
   }
 
@@ -79,7 +81,8 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
 
   const handleClickToTrigger = async (): Promise<void> => {
     setIsModalOpen(true);
-    await generateSession();
+    const generatedSession = await generateSession();
+    if (onSessionCreation != null && typeof onSessionCreation === 'function') onSessionCreation(generatedSession);
   }
 
   const renderButton = (): JSX.Element => {
@@ -109,6 +112,7 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
 GenerateProof.defaultProps = {
   onProofSubmission: () => {},
   onProofSubmissionFailed: () => {},
+  onSessionCreation: () => {},
   customize: {}
 };
 
@@ -117,6 +121,7 @@ GenerateProof.propTypes = {
   userID: PropTypes.string.isRequired,
   onProofSubmission: PropTypes.func,
   onProofSubmissionFailed: PropTypes.func,
+  onSessionCreation: PropTypes.func,
   customize: PropTypes.object
 
 };
