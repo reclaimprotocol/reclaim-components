@@ -1,6 +1,6 @@
 {
   "name": "@reclaimprotocol/reclaim-connect-react",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.12",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -62,7 +62,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@reclaimprotocol/reclaim-client-sdk": "^0.0.10",
+    "@reclaimprotocol/reclaim-client-sdk": "^0.0.11",
     "lodash": "^4.17.21",
     "react-modal": "^3.16.1",
     "react-qr-code": "^2.0.12",
