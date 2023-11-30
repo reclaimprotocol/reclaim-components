@@ -66,6 +66,6 @@
     "lodash": "^4.17.21",
     "react-modal": "^3.16.1",
     "react-qr-code": "^2.0.12",
-    "styled-components": "^6.0.8"
+    "styled-components": "^5.3.11"
   }
 }
