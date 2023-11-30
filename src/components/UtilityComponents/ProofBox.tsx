@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type ReactNode } from 'react';
+import React, { type FC, useEffect, useState, type ReactNode } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import QRCode from 'react-qr-code';
@@ -9,12 +9,35 @@ import { PROOF_STATE } from '../../util/constants';
 import UploadFail from '../designComponents/Icon/upload-fail';
 import UploadSuccess from '../designComponents/Icon/upload-success';
 import { type ProofBoxProps, type ProofBoxRef } from '../../types/UtilityComponents/ProofBox';
+import { isMobile } from '../../util';
 
 const SESSION_TIMEOUT = 300;
 const StyledFlex = styled(Flex)`
   font-family: 'circular';
   color: #000000;
 `;
+
+const StyledViewOnMobileInfoText = styled.p`
+  margin: 0;
+  margin-bottom: 4px;
+  font-family: monospace;
+`;
+
+const StyledViewOnMobileLink = styled.a`
+  font-family: monospace;
+`;
+
+const ViewOnMovile: FC<{ QRLink: string }> = ({ QRLink }) => {
+  return (
+    <center>
+      <Flex direction='column' gap='4'>
+        <StyledViewOnMobileInfoText>Viewing on mobile?</StyledViewOnMobileInfoText>
+        <StyledViewOnMobileInfoText>Tap on the link below</StyledViewOnMobileInfoText>
+        <StyledViewOnMobileLink href={QRLink}>{QRLink}</StyledViewOnMobileLink>
+      </Flex>
+    </center>
+  );
+}
 
 const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: ProofBoxRef) {
   const { QRLink, size, proofState, proofSubmissionDetailsCustomConfig } = props;
@@ -23,6 +46,7 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
   const currentSubmissionSuccessText = ((proofSubmissionDetailsCustomConfig?.successText) != null) ? proofSubmissionDetailsCustomConfig?.successText : ' Submission Successful';
   const currentSubmissionFailureText = ((proofSubmissionDetailsCustomConfig?.failureText) != null) ? proofSubmissionDetailsCustomConfig?.failureText : ' Submission Failed';
   const triggerButtonCustomStyle = ((proofSubmissionDetailsCustomConfig?.style) != null) ? proofSubmissionDetailsCustomConfig?.style : {};
+  const isVisitedFromMobie = isMobile();
 
   useEffect(() => {
     if (proofState === PROOF_STATE.GENERATED) setIsQRGenerated(true);
@@ -50,6 +74,7 @@ const ProofBox = React.forwardRef(function ProofBox (props: ProofBoxProps, ref: 
 						<Flex direction='column' rowGap='16px'>
 							{ !isQRGenerated && (<Loader height={200} width={100} color='#c5e4ff' />)}
 							{ isQRGenerated && (<QRCode value={QRLink} size={size} style={{ width: '100%' }} />)}
+              { isQRGenerated && isVisitedFromMobie && (<ViewOnMovile QRLink={QRLink} />)}
 							{renderProofSubmissionState()}
 						</Flex>
         </Flex>
