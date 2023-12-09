@@ -26,7 +26,7 @@ const StyledGenerateProofButton = styled.button`
 const GenerateProof = React.forwardRef(function GenerateProof (props: GenerateProofProps, ref: GenerateProofRef) {
   const {
     appID,
-    userID,
+    userID = '',
     onSessionCreation,
     onProofSubmission,
     onProofSubmissionFailed,
@@ -47,9 +47,6 @@ const GenerateProof = React.forwardRef(function GenerateProof (props: GeneratePr
   // notify developer, if appID is not provided
   if (typeof appID === 'undefined') {
     ErrorHandler('appID required: Please provide unique app ID to GenerateProof component.');
-  }
-  if (typeof userID === 'undefined') {
-    ErrorHandler('userID required: Please provide unique user ID to GenerateProof component.');
   }
 
   // Instantiate ReclaimSDK with the appID.
